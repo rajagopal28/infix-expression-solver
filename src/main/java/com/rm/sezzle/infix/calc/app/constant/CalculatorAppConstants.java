@@ -9,4 +9,8 @@ public interface CalculatorAppConstants {
     int MULTI_DIVIDE_PRIORITY_TWO = 2;
 
     String DECIMAL_REGEX = "^\\d+\\.?\\d*$";
+
+
+    String ERROR_INVALID_NUMBER = "Not a valid number!";
+    String ERROR_DIVIDE_BY_ZERO = "Cannot Divide by zero!!";
 }
