@@ -52,4 +52,16 @@ public class InfixExpressionSolverTest {
         Assert.assertNotNull(result2);
         Assert.assertEquals(0, result2.getValue(), 0.001);
     }
+
+    @Test
+    public void testSimpleExpressionWithTwoDifferentOperation_DifferentPriority_PowerOperator() {
+        InfixExpressionSolver solver = new InfixExpressionSolver();
+        Operand result1 = solver.solve("36/6*3-2^2+8");
+        Operand result2 = solver.solve("30/5+2^2*2-14");
+        Assert.assertNotNull(result1);
+        Assert.assertEquals(22, result1.getValue(), 0.001);
+        Assert.assertNotNull(result2);
+        Assert.assertEquals(0, result2.getValue(), 0.001);
+    }
+
 }
