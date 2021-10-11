@@ -64,4 +64,16 @@ public class InfixExpressionSolverTest {
         Assert.assertEquals(0, result2.getValue(), 0.001);
     }
 
+
+    @Test
+    public void testSimpleExpressionWithTwoDifferentOperation_DifferentPriority_Braces() {
+        InfixExpressionSolver solver = new InfixExpressionSolver();
+        Operand result1 = solver.solve("2*(5+1)/3");
+        Operand result2 = solver.solve("4/(2^2)-1+8+[30/10]");
+        Assert.assertNotNull(result1);
+        Assert.assertEquals(4, result1.getValue(), 0.001);
+        Assert.assertNotNull(result2);
+        Assert.assertEquals(11, result2.getValue(), 0.001);
+    }
+
 }

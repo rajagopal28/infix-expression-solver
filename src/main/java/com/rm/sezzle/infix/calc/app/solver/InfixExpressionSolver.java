@@ -19,11 +19,24 @@ public class InfixExpressionSolver {
 
     public Operand solve(String expression) {
         StringTokenizer tokenizer = new StringTokenizer(expression, CalculatorAppConstants.EXPRESSION_TOKENIZATION_DELIMITERS, true);
-        while ( tokenizer.hasMoreTokens() ) {
+        while (tokenizer.hasMoreTokens()) {
             String token = tokenizer.nextToken();
             if (!token.isBlank()) {
                 if(Operand.validate(token)) {
                     operandStack.push(Operand.of(token));
+                } else if(CalculatorAppConstants.BRACKET_PAIRS.containsKey(token)) { // check for closed brackets
+                    Operator matchingOpener = OperatorFactory.getOperator(CalculatorAppConstants.BRACKET_PAIRS.get(token));
+                    while (!operandStack.isEmpty() &&
+                            !operatorStack.peek().equals(matchingOpener) &&
+                            popAndExecuteOperation(operatorStack, operandStack));
+                    if(operatorStack.isEmpty() || !operatorStack.peek().equals(matchingOpener)) {
+                        // some other operator found instead of corresponding open braces
+                        throw new RuntimeException(CalculatorAppConstants.ERROR_BRACKETS_NOT_PROPERLY_FORMED);
+                    }
+                    operatorStack.pop();// discard the matching open braces
+
+                } else if(CalculatorAppConstants.BRACKET_PAIRS.containsValue(token)) { // opening braces so just push it
+                    operatorStack.push(OperatorFactory.getOperator(token));
                 } else { // it is an operator
                     Operator currentOperation = OperatorFactory.getOperator(token);
                     while (!operatorStack.isEmpty() &&
@@ -36,6 +49,9 @@ public class InfixExpressionSolver {
         }
         while (popAndExecuteOperation(operatorStack, operandStack));
         // re-use strategy where function executes and terminates loop at the end
+        if(!operatorStack.isEmpty() || operandStack.size() > 1) {
+            throw new RuntimeException(CalculatorAppConstants.ERROR_INVALID_EXPRESSION_FORMATION);
+        }
         return operandStack.pop();
     }
 

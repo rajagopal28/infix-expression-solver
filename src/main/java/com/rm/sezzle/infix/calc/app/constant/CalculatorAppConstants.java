@@ -17,10 +17,12 @@ public interface CalculatorAppConstants {
     int CLOSE_BRACKETS_PRIORITY_FOUR = 4;
 
     String DECIMAL_REGEX = "^\\d+\\.?\\d*$";
-    String EXPRESSION_TOKENIZATION_DELIMITERS = "+-*^/() ";
+    String EXPRESSION_TOKENIZATION_DELIMITERS = "+-*^/(){}[] ";
 
     String ERROR_INVALID_NUMBER = "Not a valid number!";
     String ERROR_DIVIDE_BY_ZERO = "Cannot Divide by zero!!";
+    String ERROR_BRACKETS_NOT_PROPERLY_FORMED = "Braces not formed correctly!!\"";
+    String ERROR_INVALID_EXPRESSION_FORMATION = "Infix Expression not well formed!!";
 
     Map<String, String> BRACKET_PAIRS = Map.of(")", "(", "}", "{", "]", "[");
 
