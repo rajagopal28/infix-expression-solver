@@ -1,5 +1,6 @@
 package com.rm.sezzle.infix.calc.app.constant;
 
+import java.util.Map;
 import java.util.function.Function;
 
 public interface CalculatorAppConstants {
@@ -20,6 +21,8 @@ public interface CalculatorAppConstants {
 
     String ERROR_INVALID_NUMBER = "Not a valid number!";
     String ERROR_DIVIDE_BY_ZERO = "Cannot Divide by zero!!";
+
+    Map<String, String> BRACKET_PAIRS = Map.of(")", "(", "}", "{", "]", "[");
 
     Function<String, String> ERROR_OPERATOR_NOT_FOUND = (s) -> "Operator Symbol("+s+") not found in Factory!";
 }

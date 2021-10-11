@@ -8,13 +8,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OperatorFactory {
-    private static Map<String, Operator> operatorMap = new HashMap<>();
+    private static final Map<String, Operator> operatorMap = new HashMap<>();
     static {
         operatorMap.put(CalculatorAppConstants.ADD_OPERATOR, new Addition());
         operatorMap.put(CalculatorAppConstants.SUB_OPERATOR, new Subtraction());
         operatorMap.put(CalculatorAppConstants.MULTIPLY_OPERATOR, new Multiplication());
         operatorMap.put(CalculatorAppConstants.DIVIDE_OPERATOR, new Division());
         operatorMap.put(CalculatorAppConstants.POWER_OPERATOR, new Exponentiation());
+        CalculatorAppConstants.BRACKET_PAIRS.forEach((k, v) -> {
+            operatorMap.put(k, new CloseBracket(k));
+            operatorMap.put(v, new OpenBracket(v));
+        });
     }
 
     public static Operator getOperator(String symbol) {
