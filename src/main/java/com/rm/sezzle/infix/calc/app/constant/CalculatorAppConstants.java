@@ -1,5 +1,7 @@
 package com.rm.sezzle.infix.calc.app.constant;
 
+import java.util.function.Function;
+
 public interface CalculatorAppConstants {
     String ADD_OPERATOR = "+";
     String SUB_OPERATOR = "-";
@@ -13,4 +15,6 @@ public interface CalculatorAppConstants {
 
     String ERROR_INVALID_NUMBER = "Not a valid number!";
     String ERROR_DIVIDE_BY_ZERO = "Cannot Divide by zero!!";
+
+    Function<String, String> ERROR_OPERATOR_NOT_FOUND = (s) -> "Operator Symbol("+s+") not found in Factory!";
 }
