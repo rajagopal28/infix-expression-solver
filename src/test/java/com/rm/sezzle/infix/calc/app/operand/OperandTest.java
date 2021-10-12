@@ -1,6 +1,7 @@
 package com.rm.sezzle.infix.calc.app.operand;
 
 import com.rm.sezzle.infix.calc.app.constant.CalculatorAppConstants;
+import com.rm.sezzle.infix.calc.app.exception.InvalidOperandFormatException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -35,12 +36,14 @@ public class OperandTest {
         try {
             Operand.of("12dfa");
         } catch (Exception ex) {
+            Assert.assertTrue(ex instanceof InvalidOperandFormatException);
             Assert.assertEquals(CalculatorAppConstants.ERROR_INVALID_NUMBER,ex.getMessage());
         }
 
         try {
             Operand.of("");
         } catch (Exception ex) {
+            Assert.assertTrue(ex instanceof InvalidOperandFormatException);
             Assert.assertEquals(CalculatorAppConstants.ERROR_INVALID_NUMBER,ex.getMessage());
         }
     }
