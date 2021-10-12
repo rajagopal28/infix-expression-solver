@@ -1,6 +1,7 @@
 package com.rm.sezzle.infix.calc.app.operator.impl;
 
 import com.rm.sezzle.infix.calc.app.constant.CalculatorAppConstants;
+import com.rm.sezzle.infix.calc.app.exception.DivideByZeroException;
 import com.rm.sezzle.infix.calc.app.operand.Operand;
 import com.rm.sezzle.infix.calc.app.operator.Operator;
 import org.junit.Assert;
@@ -52,7 +53,9 @@ public class DivisionTest {
         Operator operator = new Division();
         try {
             operator.execute(new Operand(-2d), new Operand(0d));
+            Assert.fail("Should not come here!");
         } catch (Exception ex) {
+            Assert.assertTrue(ex instanceof DivideByZeroException);
             Assert.assertEquals(CalculatorAppConstants.ERROR_DIVIDE_BY_ZERO, ex.getMessage());
         }
     }
