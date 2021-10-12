@@ -2,6 +2,7 @@ package com.rm.sezzle.infix.calc.app.solver;
 
 import com.rm.sezzle.infix.calc.app.constant.CalculatorAppConstants;
 import com.rm.sezzle.infix.calc.app.exception.InvalidExpressionException;
+import com.rm.sezzle.infix.calc.app.exception.MalformedBracketsException;
 import com.rm.sezzle.infix.calc.app.operand.Operand;
 import com.rm.sezzle.infix.calc.app.operator.Operator;
 import com.rm.sezzle.infix.calc.app.operator.factory.OperatorFactory;
@@ -22,12 +23,12 @@ public class InfixExpressionSolver {
                     operandStack.push(Operand.of(token));
                 } else if(CalculatorAppConstants.BRACKET_PAIRS.containsKey(token)) { // check for closed brackets
                     Operator matchingOpener = OperatorFactory.getOperator(CalculatorAppConstants.BRACKET_PAIRS.get(token));
-                    while (!operandStack.isEmpty() &&
+                    while (!operatorStack.isEmpty() &&
                             !operatorStack.peek().equals(matchingOpener) &&
                             popAndExecuteOperation(operatorStack, operandStack));
                     if(operatorStack.isEmpty() || !operatorStack.peek().equals(matchingOpener)) {
                         // some other operator found instead of corresponding open braces
-                        throw new RuntimeException(CalculatorAppConstants.ERROR_BRACKETS_NOT_PROPERLY_FORMED);
+                        throw new MalformedBracketsException();
                     }
                     operatorStack.pop();// discard the matching open braces
 
@@ -46,12 +47,13 @@ public class InfixExpressionSolver {
         while (popAndExecuteOperation(operatorStack, operandStack));
         // re-use strategy where function executes and terminates loop at the end
         if(!operatorStack.isEmpty() || operandStack.size() !=1) {
+            // better resource handling
             operandStack.clear();
             operatorStack.clear();
             throw new InvalidExpressionException();
         }
         Operand result = operandStack.pop();
-        operandStack.clear();
+        operandStack.clear(); // better resource handling
         return result;
     }
 

@@ -2,6 +2,7 @@ package com.rm.sezzle.infix.calc.app.solver;
 
 import com.rm.sezzle.infix.calc.app.constant.CalculatorAppConstants;
 import com.rm.sezzle.infix.calc.app.exception.InvalidExpressionException;
+import com.rm.sezzle.infix.calc.app.exception.MalformedBracketsException;
 import com.rm.sezzle.infix.calc.app.exception.OperationNotImplementedException;
 import com.rm.sezzle.infix.calc.app.operand.Operand;
 import org.junit.Assert;
@@ -126,11 +127,11 @@ public class InfixExpressionSolverTest {
             solver.solve("+2*4"); // more operator than number
             Assert.fail("Should not come here!");
         } catch (Exception ex) {
-            ex.printStackTrace();
             Assert.assertTrue(ex instanceof InvalidExpressionException);
             Assert.assertEquals(CalculatorAppConstants.ERROR_INVALID_EXPRESSION_FORMATION, ex.getMessage());
         }
     }
+
     @Test
     public void testExceptionSimpleExpressionWith_MoreOperandsThanOperator() {
         InfixExpressionSolver solver = new InfixExpressionSolver();
@@ -138,9 +139,36 @@ public class InfixExpressionSolverTest {
             solver.solve("2+3 4"); // more number than operator
             Assert.fail("Should not come here!");
         } catch (Exception ex) {
-            ex.printStackTrace();
             Assert.assertTrue(ex instanceof InvalidExpressionException);
             Assert.assertEquals(CalculatorAppConstants.ERROR_INVALID_EXPRESSION_FORMATION, ex.getMessage());
+        }
+    }
+
+    @Test
+    public void testExceptionSimpleExpressionWith_InvalidBraces() {
+        InfixExpressionSolver solver = new InfixExpressionSolver();
+        try {
+            solver.solve("[2+3}"); // more number than operator
+            Assert.fail("Should not come here!");
+        } catch (Exception ex) {
+            Assert.assertTrue(ex instanceof MalformedBracketsException);
+            Assert.assertEquals(CalculatorAppConstants.ERROR_BRACKETS_NOT_PROPERLY_FORMED, ex.getMessage());
+        }
+
+        try {
+            solver.solve("]2+3["); // more number than operator
+            Assert.fail("Should not come here!");
+        } catch (Exception ex) {
+            Assert.assertTrue(ex instanceof MalformedBracketsException);
+            Assert.assertEquals(CalculatorAppConstants.ERROR_BRACKETS_NOT_PROPERLY_FORMED, ex.getMessage());
+        }
+
+        try {
+            solver.solve("([2+3]))"); // more number than operator
+            Assert.fail("Should not come here!");
+        } catch (Exception ex) {
+            Assert.assertTrue(ex instanceof MalformedBracketsException);
+            Assert.assertEquals(CalculatorAppConstants.ERROR_BRACKETS_NOT_PROPERLY_FORMED, ex.getMessage());
         }
     }
 
