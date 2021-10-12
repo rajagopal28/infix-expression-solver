@@ -3,7 +3,6 @@ package com.rm.sezzle.infix.calc.app.operator;
 import com.rm.sezzle.infix.calc.app.operand.Operand;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.ToString;
 
 
 /*
@@ -14,7 +13,6 @@ import lombok.ToString;
 * */
 @AllArgsConstructor
 @Getter
-@ToString
 public abstract class Operator {
     private String symbol;
     private int priority;

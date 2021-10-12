@@ -4,7 +4,6 @@ import com.rm.sezzle.infix.calc.app.constant.CalculatorAppConstants;
 import com.rm.sezzle.infix.calc.app.exception.InvalidOperandFormatException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.ToString;
 
 
 /**
@@ -15,7 +14,6 @@ import lombok.ToString;
  */
 @AllArgsConstructor
 @Getter
-@ToString
 public class Operand {
     private double value;
 
