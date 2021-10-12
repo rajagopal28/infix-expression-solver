@@ -27,4 +27,20 @@ public interface CalculatorAppConstants {
     Map<String, String> BRACKET_PAIRS = Map.of(")", "(", "}", "{", "]", "[");
 
     Function<String, String> ERROR_OPERATOR_NOT_FOUND = (s) -> "Operator Symbol("+s+") not found in Factory!";
+
+    int UI_PREFERRED_WINDOW_WIDTH = 740;
+    int UI_PREFERRED_WINDOW_HEIGHT = 180;
+
+    int UI_PREFERRED_ITEM_WIDTH = 100;
+    int UI_PREFERRED_ITEM_HEIGHT = 60;
+
+    int UI_TEXT_FIELD_LENGTH = 50;
+    int UI_TEXT_FONT_SIZE = 16;
+
+
+    String UI_LABEL_APP_NAME = "Infix Expression Solver";
+    String UI_LABEL_INPUT = "Enter Expression";
+    String UI_LABEL_RESULT = "Result :: ";
+    String UI_LABEL_RESULT_ERROR = "ERROR :: ";
+    String UI_BUTTON_SOLVE = "Solve";
 }
