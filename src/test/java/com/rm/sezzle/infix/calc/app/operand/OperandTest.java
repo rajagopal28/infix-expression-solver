@@ -35,6 +35,7 @@ public class OperandTest {
     public void testParseOperandTokenFailure() {
         try {
             Operand.of("12dfa");
+            Assert.fail("Should not come here!");
         } catch (Exception ex) {
             Assert.assertTrue(ex instanceof InvalidOperandFormatException);
             Assert.assertEquals(CalculatorAppConstants.ERROR_INVALID_NUMBER,ex.getMessage());
@@ -42,6 +43,7 @@ public class OperandTest {
 
         try {
             Operand.of("");
+            Assert.fail("Should not come here!");
         } catch (Exception ex) {
             Assert.assertTrue(ex instanceof InvalidOperandFormatException);
             Assert.assertEquals(CalculatorAppConstants.ERROR_INVALID_NUMBER,ex.getMessage());

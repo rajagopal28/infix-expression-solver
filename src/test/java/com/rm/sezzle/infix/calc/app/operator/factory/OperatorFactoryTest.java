@@ -33,6 +33,7 @@ public class OperatorFactoryTest {
     public void testUnknownOperatorGet_ExceptionHandling() {
         try {
             OperatorFactory.getOperator("?");
+            Assert.fail("Should not come here!");
         } catch (Exception ex) {
             Assert.assertTrue(ex instanceof OperationNotImplementedException);
             Assert.assertEquals(CalculatorAppConstants.ERROR_OPERATOR_NOT_FOUND.apply("?"), ex.getMessage());

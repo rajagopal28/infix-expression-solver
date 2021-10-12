@@ -1,6 +1,7 @@
 package com.rm.sezzle.infix.calc.app.solver;
 
 import com.rm.sezzle.infix.calc.app.constant.CalculatorAppConstants;
+import com.rm.sezzle.infix.calc.app.exception.InvalidExpressionException;
 import com.rm.sezzle.infix.calc.app.exception.OperationNotImplementedException;
 import com.rm.sezzle.infix.calc.app.operand.Operand;
 import org.junit.Assert;
@@ -79,13 +80,67 @@ public class InfixExpressionSolverTest {
     }
 
     @Test
+    public void testSimpleExpressionWithOneNumber() {
+        InfixExpressionSolver solver = new InfixExpressionSolver();
+        Operand result = solver.solve("2");
+        Assert.assertNotNull(result);
+        Assert.assertEquals(2, result.getValue(), 0.001);
+    }
+
+    @Test
     public void testExceptionSimpleExpressionWith_InvalidOperator() {
         InfixExpressionSolver solver = new InfixExpressionSolver();
         try {
             solver.solve("5 | 1");
+            Assert.fail("Should not come here!");
         } catch (Exception ex) {
             Assert.assertTrue(ex instanceof OperationNotImplementedException);
             Assert.assertEquals(CalculatorAppConstants.ERROR_OPERATOR_NOT_FOUND.apply("|"), ex.getMessage());
+        }
+    }
+
+    @Test
+    public void testExceptionSimpleExpressionWith_BlankExpression() {
+        InfixExpressionSolver solver = new InfixExpressionSolver();
+        try {
+            solver.solve(" ");
+            Assert.fail("Should not come here!");
+        } catch (Exception ex) {
+            Assert.assertTrue(ex instanceof InvalidExpressionException);
+            Assert.assertEquals(CalculatorAppConstants.ERROR_INVALID_EXPRESSION_FORMATION, ex.getMessage());
+        }
+    }
+
+    @Test
+    public void testExceptionSimpleExpressionWith_MoreOperatorThanOperands() {
+        InfixExpressionSolver solver = new InfixExpressionSolver();
+        try {
+            solver.solve("-");
+            Assert.fail("Should not come here!");
+        } catch (Exception ex) {
+            Assert.assertTrue(ex instanceof InvalidExpressionException);
+            Assert.assertEquals(CalculatorAppConstants.ERROR_INVALID_EXPRESSION_FORMATION, ex.getMessage());
+        }
+
+        try {
+            solver.solve("+2*4"); // more operator than number
+            Assert.fail("Should not come here!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Assert.assertTrue(ex instanceof InvalidExpressionException);
+            Assert.assertEquals(CalculatorAppConstants.ERROR_INVALID_EXPRESSION_FORMATION, ex.getMessage());
+        }
+    }
+    @Test
+    public void testExceptionSimpleExpressionWith_MoreOperandsThanOperator() {
+        InfixExpressionSolver solver = new InfixExpressionSolver();
+        try {
+            solver.solve("2+3 4"); // more number than operator
+            Assert.fail("Should not come here!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Assert.assertTrue(ex instanceof InvalidExpressionException);
+            Assert.assertEquals(CalculatorAppConstants.ERROR_INVALID_EXPRESSION_FORMATION, ex.getMessage());
         }
     }
 

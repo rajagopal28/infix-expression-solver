@@ -1,6 +1,7 @@
 package com.rm.sezzle.infix.calc.app.solver;
 
 import com.rm.sezzle.infix.calc.app.constant.CalculatorAppConstants;
+import com.rm.sezzle.infix.calc.app.exception.InvalidExpressionException;
 import com.rm.sezzle.infix.calc.app.operand.Operand;
 import com.rm.sezzle.infix.calc.app.operator.Operator;
 import com.rm.sezzle.infix.calc.app.operator.factory.OperatorFactory;
@@ -9,15 +10,10 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class InfixExpressionSolver {
-    private Stack<Operand> operandStack;
-    private Stack<Operator> operatorStack;
-
-    public InfixExpressionSolver() {
-        this.operandStack = new Stack<>();
-        this.operatorStack = new Stack<>();
-    }
 
     public Operand solve(String expression) {
+        Stack<Operand> operandStack = new Stack<>();
+        Stack<Operator> operatorStack = new Stack<>();
         StringTokenizer tokenizer = new StringTokenizer(expression, CalculatorAppConstants.EXPRESSION_TOKENIZATION_DELIMITERS, true);
         while (tokenizer.hasMoreTokens()) {
             String token = tokenizer.nextToken();
@@ -49,10 +45,14 @@ public class InfixExpressionSolver {
         }
         while (popAndExecuteOperation(operatorStack, operandStack));
         // re-use strategy where function executes and terminates loop at the end
-        if(!operatorStack.isEmpty() || operandStack.size() > 1) {
-            throw new RuntimeException(CalculatorAppConstants.ERROR_INVALID_EXPRESSION_FORMATION);
+        if(!operatorStack.isEmpty() || operandStack.size() !=1) {
+            operandStack.clear();
+            operatorStack.clear();
+            throw new InvalidExpressionException();
         }
-        return operandStack.pop();
+        Operand result = operandStack.pop();
+        operandStack.clear();
+        return result;
     }
 
     private boolean popAndExecuteOperation(Stack<Operator> operatorStack, Stack<Operand> operandStack) {
