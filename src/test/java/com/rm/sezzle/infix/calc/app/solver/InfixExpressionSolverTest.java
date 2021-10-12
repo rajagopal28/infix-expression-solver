@@ -1,5 +1,7 @@
 package com.rm.sezzle.infix.calc.app.solver;
 
+import com.rm.sezzle.infix.calc.app.constant.CalculatorAppConstants;
+import com.rm.sezzle.infix.calc.app.exception.OperationNotImplementedException;
 import com.rm.sezzle.infix.calc.app.operand.Operand;
 import org.junit.Assert;
 import org.junit.Test;
@@ -74,6 +76,17 @@ public class InfixExpressionSolverTest {
         Assert.assertEquals(4, result1.getValue(), 0.001);
         Assert.assertNotNull(result2);
         Assert.assertEquals(11, result2.getValue(), 0.001);
+    }
+
+    @Test
+    public void testExceptionSimpleExpressionWith_InvalidOperator() {
+        InfixExpressionSolver solver = new InfixExpressionSolver();
+        try {
+            solver.solve("5 | 1");
+        } catch (Exception ex) {
+            Assert.assertTrue(ex instanceof OperationNotImplementedException);
+            Assert.assertEquals(CalculatorAppConstants.ERROR_OPERATOR_NOT_FOUND.apply("|"), ex.getMessage());
+        }
     }
 
 }

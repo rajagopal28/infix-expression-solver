@@ -1,6 +1,7 @@
 package com.rm.sezzle.infix.calc.app.operator.factory;
 
 import com.rm.sezzle.infix.calc.app.constant.CalculatorAppConstants;
+import com.rm.sezzle.infix.calc.app.exception.OperationNotImplementedException;
 import com.rm.sezzle.infix.calc.app.operator.Operator;
 import com.rm.sezzle.infix.calc.app.operator.impl.*;
 
@@ -23,7 +24,7 @@ public class OperatorFactory {
 
     public static Operator getOperator(String symbol) {
         if(!operatorMap.containsKey(symbol)) {
-            throw new RuntimeException(CalculatorAppConstants.ERROR_OPERATOR_NOT_FOUND.apply(symbol));
+            throw new OperationNotImplementedException(symbol);
         }
         return operatorMap.get(symbol);
     }

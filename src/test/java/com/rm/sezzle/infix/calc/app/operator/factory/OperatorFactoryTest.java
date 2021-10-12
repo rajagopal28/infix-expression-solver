@@ -2,6 +2,7 @@ package com.rm.sezzle.infix.calc.app.operator.factory;
 
 
 import com.rm.sezzle.infix.calc.app.constant.CalculatorAppConstants;
+import com.rm.sezzle.infix.calc.app.exception.OperationNotImplementedException;
 import com.rm.sezzle.infix.calc.app.operator.Operator;
 import com.rm.sezzle.infix.calc.app.operator.impl.Addition;
 import com.rm.sezzle.infix.calc.app.operator.impl.CloseBracket;
@@ -33,6 +34,7 @@ public class OperatorFactoryTest {
         try {
             OperatorFactory.getOperator("?");
         } catch (Exception ex) {
+            Assert.assertTrue(ex instanceof OperationNotImplementedException);
             Assert.assertEquals(CalculatorAppConstants.ERROR_OPERATOR_NOT_FOUND.apply("?"), ex.getMessage());
         }
     }
