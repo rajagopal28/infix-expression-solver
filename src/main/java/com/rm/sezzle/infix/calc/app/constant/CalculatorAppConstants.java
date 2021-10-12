@@ -3,6 +3,12 @@ package com.rm.sezzle.infix.calc.app.constant;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * Interface containing essential constants used across the application.
+ *
+ * @author Rajagopal M
+ *
+ */
 public interface CalculatorAppConstants {
     String ADD_OPERATOR = "+";
     String SUB_OPERATOR = "-";

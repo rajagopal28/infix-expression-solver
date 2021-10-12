@@ -7,8 +7,19 @@ import com.rm.sezzle.infix.calc.app.solver.InfixExpressionSolver;
 
 import javax.swing.*;
 import java.awt.*;
-
+/*
+* Main Class that provides a simple UI to parse and get results of Solution of the given Infix Expression.
+*
+* @author Rajagopal M
+* */
 public class CalculatorApp {
+
+
+    /**
+     * Main method os the entry point of system execution.
+     *
+     * @param args passed from command line that are involved in running the application and getting the results
+     */
     public static void main(String[] args) {
         System.out.println("Hello World!!");
 
