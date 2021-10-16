@@ -83,3 +83,9 @@ I have created a runnable jar archive that lets us use the application. Which ca
 - Basic Infix expression parsing : https://www.geeksforgeeks.org/expression-evaluation/
 - Collection utils: https://www.journaldev.com/16635/collections-class-java-util-collections
 - Runnable Jar: https://stackoverflow.com/a/5258323
+- TextField Alignment: https://stackoverflow.com/a/12589611
+- Dimension setting: https://stackoverflow.com/a/22920121
+- Swing UI; https://www.guru99.com/java-swing-gui.html
+- Changing fonts: https://stackoverflow.com/a/2715127
+- Testing GUI using robots(didn't use): https://stackoverflow.com/a/16418685
+- Major reference repo: https://github.com/rlama7/ExpressionEvaluator/
