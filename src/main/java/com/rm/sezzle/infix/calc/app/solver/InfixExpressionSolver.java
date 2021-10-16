@@ -46,7 +46,6 @@ public class InfixExpressionSolver {
                         throw new MalformedBracketsException();
                     }
                     operatorStack.pop();// discard the matching open braces
-
                 } else if(CalculatorAppConstants.BRACKET_PAIRS.containsValue(token)) { // opening braces so just push it
                     operatorStack.push(OperatorFactory.getOperator(token));
                 } else { // it is an operator

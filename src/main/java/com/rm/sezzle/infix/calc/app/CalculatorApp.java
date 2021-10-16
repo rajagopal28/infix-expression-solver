@@ -21,7 +21,6 @@ public class CalculatorApp {
      * @param args passed from command line that are involved in running the application and getting the results
      */
     public static void main(String[] args) {
-        System.out.println("Hello World!!");
 
         Dimension preferredSize = new Dimension(CalculatorAppConstants.UI_PREFERRED_ITEM_WIDTH, CalculatorAppConstants.UI_PREFERRED_ITEM_HEIGHT);
         Font defaultFont = new Font(Font.SANS_SERIF, Font.PLAIN, CalculatorAppConstants.UI_TEXT_FONT_SIZE);
